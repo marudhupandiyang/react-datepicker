@@ -38,7 +38,8 @@ export default class Day extends React.Component {
     startDate: PropTypes.instanceOf(Date),
     renderDayContents: PropTypes.func,
     handleOnKeyDown: PropTypes.func,
-    isInputFocused: PropTypes.bool
+    isInputFocused: PropTypes.bool,
+    todayDate: PropTypes.instanceOf(Date)
   };
 
   componentDidMount() {
@@ -230,7 +231,9 @@ export default class Day extends React.Component {
         "react-datepicker__day--in-selecting-range": this.isInSelectingRange(),
         "react-datepicker__day--selecting-range-start": this.isSelectingRangeStart(),
         "react-datepicker__day--selecting-range-end": this.isSelectingRangeEnd(),
-        "react-datepicker__day--today": this.isSameDay(newDate()),
+        "react-datepicker__day--today": this.isSameDay(
+          this.props.todayDate ? this.props.todayDate() : newDate()
+        ),
         "react-datepicker__day--weekend": this.isWeekend(),
         "react-datepicker__day--outside-month": this.isOutsideMonth()
       },
@@ -240,14 +243,15 @@ export default class Day extends React.Component {
 
   getAriaLabel = () => {
     const {
-            day,
-            ariaLabelPrefixWhenEnabled = "Choose",
-            ariaLabelPrefixWhenDisabled = "Not available" 
+      day,
+      ariaLabelPrefixWhenEnabled = "Choose",
+      ariaLabelPrefixWhenDisabled = "Not available"
     } = this.props;
-    
-    const prefix = this.isDisabled() || this.isExcluded()
-                    ? ariaLabelPrefixWhenDisabled
-                    : ariaLabelPrefixWhenEnabled;
+
+    const prefix =
+      this.isDisabled() || this.isExcluded()
+        ? ariaLabelPrefixWhenDisabled
+        : ariaLabelPrefixWhenEnabled;
 
     return `${prefix} ${formatDate(day, "PPPP")}`;
   };

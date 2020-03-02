@@ -158,7 +158,8 @@ export default class Calendar extends React.Component {
     handleOnKeyDown: PropTypes.func,
     isInputFocused: PropTypes.bool,
     customTimeInput: PropTypes.element,
-    weekAriaLabelPrefix: PropTypes.string
+    weekAriaLabelPrefix: PropTypes.string,
+    todayDate:PropTypes.instanceOf(Date),
   };
 
   constructor(props) {
@@ -218,10 +219,10 @@ export default class Calendar extends React.Component {
   };
 
   getDateInView = () => {
-    const { preSelection, selected, openToDate } = this.props;
+    const { preSelection, selected, openToDate, todayDate } = this.props;
     const minDate = getEffectiveMinDate(this.props);
     const maxDate = getEffectiveMaxDate(this.props);
-    const current = newDate();
+    const current = todayDate ? todayDate() : newDate();
     const initialDate = openToDate || selected || preSelection;
     if (initialDate) {
       return initialDate;
@@ -722,6 +723,7 @@ export default class Calendar extends React.Component {
             showMonthYearPicker={this.props.showMonthYearPicker}
             showQuarterYearPicker={this.props.showQuarterYearPicker}
             isInputFocused={this.props.isInputFocused}
+            todayDate={this.props.todayDate}
           />
         </div>
       );

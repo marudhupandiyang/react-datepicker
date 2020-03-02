@@ -45,7 +45,8 @@ export default class Week extends React.Component {
     shouldCloseOnSelect: PropTypes.bool,
     renderDayContents: PropTypes.func,
     handleOnKeyDown: PropTypes.func,
-    isInputFocused: PropTypes.bool
+    isInputFocused: PropTypes.bool,
+    todayDate: PropTypes.instanceOf(Date),
   };
 
   handleDayClick = (day, event) => {
@@ -124,6 +125,7 @@ export default class Week extends React.Component {
             disabledKeyboardNavigation={this.props.disabledKeyboardNavigation}
             handleOnKeyDown={this.props.handleOnKeyDown}
             isInputFocused={this.props.isInputFocused}
+            todayDate={this.props.todayDate}
           />
         );
       })

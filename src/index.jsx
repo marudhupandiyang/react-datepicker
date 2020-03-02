@@ -233,7 +233,8 @@ export default class DatePicker extends React.Component {
     excludeScrollbar: PropTypes.bool,
     enableTabLoop: PropTypes.bool,
     customTimeInput: PropTypes.element,
-    weekAriaLabelPrefix: PropTypes.string
+    weekAriaLabelPrefix: PropTypes.string,
+    todayDate: PropTypes.instanceOf(Date)
   };
 
   constructor(props) {
@@ -795,6 +796,7 @@ export default class DatePicker extends React.Component {
         handleOnKeyDown={this.onDayKeyDown}
         isInputFocused={this.state.focused}
         customTimeInput={this.props.customTimeInput}
+        todayDate={this.props.todayDate}
       >
         {this.props.children}
       </WrappedCalendar>
