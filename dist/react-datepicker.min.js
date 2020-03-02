@@ -1522,7 +1522,7 @@
               a.props.handleOnKeyDown(e);
           }),
           de(De(a), "isSameDay", function(e) {
-            return Fe(a.props.day, e);
+            return Fe(a.props.day, e || (a.props.todayDate ? todayDate() : ""));
           }),
           de(De(a), "isKeyboardSelected", function() {
             return (
@@ -2734,10 +2734,11 @@
                   className: "react-datepicker__today-button",
                   onClick: function(e) {
                     return n.props.onSelect(
-                      ((t = n.props.todayDate), B(t ? t() : Ce())),
+                      (function(e) {
+                        return B(e ? e() : Ce());
+                      })(n.props.todayDate),
                       e
                     );
-                    var t;
                   }
                 },
                 n.props.todayButton
