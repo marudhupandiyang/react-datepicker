@@ -21,8 +21,8 @@ var u = e(require("date-fns/subDays")),
   m = e(require("date-fns/subMonths")),
   f = e(require("date-fns/subYears")),
   y = e(require("date-fns/getSeconds")),
-  D = e(require("date-fns/getMinutes")),
-  v = e(require("date-fns/getHours")),
+  v = e(require("date-fns/getMinutes")),
+  D = e(require("date-fns/getHours")),
   g = e(require("date-fns/getDay")),
   w = e(require("date-fns/getDate")),
   k = e(require("date-fns/getMonth")),
@@ -188,7 +188,7 @@ function ye(e, t) {
       return t.time({ width: "full" });
   }
 }
-var De = {
+var ve = {
     p: ye,
     P: function(e, t) {
       var r,
@@ -213,7 +213,7 @@ var De = {
       return r.replace("{{date}}", fe(a, t)).replace("{{time}}", ye(o, t));
     }
   },
-  ve = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
+  De = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
 function ge(e) {
   var t = e
     ? "string" == typeof e || e instanceof String
@@ -238,12 +238,12 @@ function we(e, t, r, n) {
         ? (i = ke(a) && e === o(a, t, { awareOfUnicodeTokens: !0 }))
         : ke(a) ||
           ((t = t
-            .match(ve)
+            .match(De)
             .map(function(e) {
               var t = e[0];
               return "p" === t || "P" === t
                 ? s
-                  ? (0, De[t])(e, s.formatLong)
+                  ? (0, ve[t])(e, s.formatLong)
                   : t
                 : e;
             })
@@ -446,7 +446,7 @@ function Ve(e) {
 }
 function Ue(e, t) {
   for (var r = t.length, n = 0; n < r; n++)
-    if (v(t[n]) === v(e) && D(t[n]) === D(e)) return !0;
+    if (D(t[n]) === D(e) && v(t[n]) === v(e)) return !0;
   return !1;
 }
 function $e(e, t) {
@@ -455,9 +455,9 @@ function $e(e, t) {
   if (!r || !n) throw new Error("Both minTime and maxTime props required");
   var a,
     o = ge(),
-    s = E(M(o, D(e)), v(e)),
-    i = E(M(o, D(r)), v(r)),
-    p = E(M(o, D(n)), v(n));
+    s = E(M(o, v(e)), D(e)),
+    i = E(M(o, v(r)), D(r)),
+    p = E(M(o, v(n)), D(n));
   try {
     a = !J(s, { start: i, end: p });
   } catch (e) {
@@ -577,7 +577,7 @@ function tt() {
 }
 function rt(e, t, r, n, a) {
   for (var o = a.length, p = [], c = 0; c < o; c++) {
-    var l = s(i(e, v(a[c])), D(a[c])),
+    var l = s(i(e, D(a[c])), v(a[c])),
       d = s(e, (r + 1) * n);
     z(l, t) && G(l, d) && p.push(a[c]);
   }
@@ -1258,7 +1258,7 @@ var lt = te(
             a.props.handleOnKeyDown(e);
         }),
         ie(he(a), "isSameDay", function(e) {
-          return Ye(a.props.day, e || (a.props.todayDate ? todayDate() : ""));
+          return Ye(a.props.day, e);
         }),
         ie(he(a), "isKeyboardSelected", function() {
           return (
@@ -1872,15 +1872,15 @@ var lt = te(
           ];
           return (
             n.props.selected &&
-              t === v(e) &&
-              r === D(e) &&
+              t === D(e) &&
+              r === v(e) &&
               a.push("react-datepicker__time-list-item--selected"),
             (((n.props.minTime || n.props.maxTime) && $e(e, n.props)) ||
               (n.props.excludeTimes && Ue(e, n.props.excludeTimes)) ||
               (n.props.includeTimes && !Ue(e, n.props.includeTimes))) &&
               a.push("react-datepicker__time-list-item--disabled"),
             n.props.injectTimes &&
-              (60 * v(e) + D(e)) % n.props.intervals != 0 &&
+              (60 * D(e) + v(e)) % n.props.intervals != 0 &&
               a.push("react-datepicker__time-list-item--injected"),
             a.join(" ")
           );
@@ -1891,8 +1891,8 @@ var lt = te(
               r = n.props.format ? n.props.format : "p",
               a = n.props.intervals,
               o = n.props.selected || n.props.openToDate || ge(),
-              i = v(o),
-              p = D(o),
+              i = D(o),
+              p = v(o),
               c = Me(ge()),
               l = 1440 / a,
               d =
@@ -1918,7 +1918,7 @@ var lt = te(
                 onClick: n.handleClick.bind(he(n), e),
                 className: n.liClasses(e, i, p),
                 ref: function(t) {
-                  i === v(e) && p >= D(e) && (n.centerLi = t);
+                  i === D(e) && p >= v(e) && (n.centerLi = t);
                 }
               },
               be(e, r, n.props.locale)
@@ -2023,7 +2023,7 @@ var lt = te(
 ie(yt, "calcCenterPosition", function(e, t) {
   return t.offsetTop - (e / 2 - t.clientHeight / 2);
 });
-var Dt = (function(e) {
+var vt = (function(e) {
   function r(e) {
     var n;
     return (
@@ -2088,7 +2088,7 @@ var Dt = (function(e) {
     r
   );
 })();
-function vt(e) {
+function Dt(e) {
   var r = e.className,
     n = e.children,
     a = e.showPopperArrow,
@@ -2456,11 +2456,10 @@ var gt = [
                 className: "react-datepicker__today-button",
                 onClick: function(e) {
                   return r.props.onSelect(
-                    (function(e) {
-                      return F(e ? e() : ge());
-                    })(r.props.todayDate),
+                    ((t = r.props.todayDate), F(t ? t() : ge())),
                     e
                   );
+                  var t;
                 }
               },
               r.props.todayButton
@@ -2672,7 +2671,7 @@ var gt = [
           var e = new Date(r.props.selected),
             n = "".concat(nt(e.getHours()), ":").concat(nt(e.getMinutes()));
           if (r.props.showTimeInput)
-            return t.createElement(Dt, {
+            return t.createElement(vt, {
               timeString: n,
               timeInputLabel: r.props.timeInputLabel,
               onChange: r.props.onTimeChange,
@@ -2734,7 +2733,7 @@ var gt = [
         {
           key: "render",
           value: function() {
-            var e = this.props.container || vt;
+            var e = this.props.container || Dt;
             return t.createElement(
               "div",
               { ref: this.containerRef },
@@ -2939,6 +2938,8 @@ var St = (function(e) {
               ? o.props.startDate
               : o.props.selectsStart && o.props.endDate
               ? o.props.endDate
+              : o.props.todayDate
+              ? o.props.todayDate()
               : ge();
           }
         ),
@@ -3067,7 +3068,7 @@ var St = (function(e) {
                 if (o.props.selected) {
                   var s = o.props.selected;
                   r && (s = ge(a)),
-                    (a = Ce(a, { hour: v(s), minute: D(s), second: y(s) }));
+                    (a = Ce(a, { hour: D(s), minute: v(s), second: y(s) }));
                 }
                 o.props.inline || o.setState({ preSelection: a }),
                   o.props.inline &&
@@ -3095,7 +3096,7 @@ var St = (function(e) {
         ie(he(o), "handleTimeChange", function(e) {
           var t = Ce(
             o.props.selected ? o.props.selected : o.getPreSelection(),
-            { hour: v(e), minute: D(e) }
+            { hour: D(e), minute: v(e) }
           );
           o.setState({ preSelection: t }),
             o.props.onChange(t),
@@ -3521,7 +3522,7 @@ var St = (function(e) {
   })(),
   Mt = "input",
   Et = "navigate";
-(exports.CalendarContainer = vt),
+(exports.CalendarContainer = Dt),
   (exports.default = St),
   (exports.getDefaultLocale = qe),
   (exports.registerLocale = function(e, t) {

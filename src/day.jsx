@@ -91,11 +91,7 @@ export default class Day extends React.Component {
     this.props.handleOnKeyDown(event);
   };
 
-  isSameDay = other =>
-    isSameDay(
-      this.props.day,
-      other || (this.props.todayDate ? todayDate() : "")
-    );
+  isSameDay = other => isSameDay(this.props.day, other);
 
   isKeyboardSelected = () =>
     !this.props.disabledKeyboardNavigation &&
