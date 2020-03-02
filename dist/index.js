@@ -1350,10 +1350,7 @@ var lt = te(
             {
               "react-datepicker__day--disabled": a.isDisabled(),
               "react-datepicker__day--excluded": a.isExcluded(),
-              "react-datepicker__day--selected": a.isSameDay(
-                a.props.selected ||
-                  (a.props.todayDate ? a.props.todayDate() : "")
-              ),
+              "react-datepicker__day--selected": a.isSameDay(a.props.selected),
               "react-datepicker__day--keyboard-selected": a.isKeyboardSelected(),
               "react-datepicker__day--range-start": a.isRangeStart(),
               "react-datepicker__day--range-end": a.isRangeEnd(),
