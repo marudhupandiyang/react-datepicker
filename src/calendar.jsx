@@ -159,7 +159,7 @@ export default class Calendar extends React.Component {
     isInputFocused: PropTypes.bool,
     customTimeInput: PropTypes.element,
     weekAriaLabelPrefix: PropTypes.string,
-    todayDate:PropTypes.instanceOf(Date),
+    todayDate: PropTypes.instanceOf(Date)
   };
 
   constructor(props) {
@@ -567,7 +567,9 @@ export default class Calendar extends React.Component {
     return (
       <div
         className="react-datepicker__today-button"
-        onClick={e => this.props.onSelect(getStartOfToday(), e)}
+        onClick={e =>
+          this.props.onSelect(getStartOfToday(this.props.todayDate), e)
+        }
       >
         {this.props.todayButton}
       </div>

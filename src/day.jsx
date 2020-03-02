@@ -223,7 +223,10 @@ export default class Day extends React.Component {
       {
         "react-datepicker__day--disabled": this.isDisabled(),
         "react-datepicker__day--excluded": this.isExcluded(),
-        "react-datepicker__day--selected": this.isSameDay(this.props.selected),
+        "react-datepicker__day--selected": this.isSameDay(
+          this.props.selected ||
+            (this.props.todayDate ? this.props.todayDate() : "")
+        ),
         "react-datepicker__day--keyboard-selected": this.isKeyboardSelected(),
         "react-datepicker__day--range-start": this.isRangeStart(),
         "react-datepicker__day--range-end": this.isRangeEnd(),

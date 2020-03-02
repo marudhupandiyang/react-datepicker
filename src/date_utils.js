@@ -222,8 +222,8 @@ export function getStartOfQuarter(date) {
   return startOfQuarter(date);
 }
 
-export function getStartOfToday() {
-  return startOfDay(newDate());
+export function getStartOfToday(todayDate) {
+  return startOfDay(todayDate ? todayDate() : newDate());
 }
 
 // *** End of ***

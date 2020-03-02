@@ -1615,7 +1615,8 @@
                 "react-datepicker__day--disabled": a.isDisabled(),
                 "react-datepicker__day--excluded": a.isExcluded(),
                 "react-datepicker__day--selected": a.isSameDay(
-                  a.props.selected
+                  a.props.selected ||
+                    (a.props.todayDate ? a.props.todayDate() : "")
                 ),
                 "react-datepicker__day--keyboard-selected": a.isKeyboardSelected(),
                 "react-datepicker__day--range-start": a.isRangeStart(),
@@ -2732,7 +2733,11 @@
                 {
                   className: "react-datepicker__today-button",
                   onClick: function(e) {
-                    return n.props.onSelect(B(Ce()), e);
+                    return n.props.onSelect(
+                      ((t = n.props.todayDate), B(t ? t() : Ce())),
+                      e
+                    );
+                    var t;
                   }
                 },
                 n.props.todayButton
